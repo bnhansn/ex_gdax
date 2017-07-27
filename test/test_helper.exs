@@ -9,10 +9,10 @@ defmodule TestHelper do
     with_mock_request({:get, fn(_url, _headers, _options) -> response end}, fun)
   end
   def with_mock_request(:post, response, fun) do
-    with_mock_request({:post, fn(_url, _headers, _options) -> response end}, fun)
+    with_mock_request({:post, fn(_url, _body, _headers) -> response end}, fun)
   end
   def with_mock_request(:delete, response, fun) do
-    with_mock_request({:delete, fn(_url, _headers, _options) -> response end}, fun)
+    with_mock_request({:delete, fn(_url, _headers) -> response end}, fun)
   end
   def with_mock_request(stub, fun) do
     with_mock HTTPoison, [:passthrough], [stub] do

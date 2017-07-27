@@ -120,7 +120,7 @@ defmodule ExGdax.MarketTest do
       response = http_response(%{"high" => "420.00"}, 200)
 
       with_mock_request :get, response, fn ->
-        assert {:ok, %{"hight" => "420.00"}} == Market.stats("ETH-USD")
+        assert {:ok, %{"high" => "420.00"}} == Market.stats("ETH-USD")
       end
     end
 
