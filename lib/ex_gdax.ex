@@ -1,5 +1,5 @@
 defmodule ExGdax do
   @moduledoc """
-  Gdax API client.
+  GDAX API client.
   """
 end
