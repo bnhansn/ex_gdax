@@ -27,7 +27,7 @@ defmodule ExGdax.Api do
 
   defp url(path), do: @url <> path
 
-  defp headers(method, path, body \\ nil) do
+  defp headers(method, path, body \\ %{}) do
     timestamp = :os.system_time(:seconds)
     [
       "Content-Type": "application/json",
@@ -40,7 +40,7 @@ defmodule ExGdax.Api do
 
   defp sign_request(timestamp, method, path, body) do
     key = Base.decode64!(Application.get_env(:ex_gdax, :api_secret))
-    body = if body, do: "", else: Poison.encode!(body)
+    body = if Enum.empty?(body), do: "", else: Poison.encode!(body)
     data = "#{timestamp}#{method}#{path}#{body}"
     :sha256 |> :crypto.hmac(key, data) |> Base.encode64()
   end

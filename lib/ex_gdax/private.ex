@@ -2,84 +2,97 @@ defmodule ExGdax.Private do
   @moduledoc """
   Private endpoints for order management and account management.
   """
-  alias ExGdax.Api
+  import ExGdax.Api
 
-  @doc """
-  List accounts.
-
-  ## Examples
-
-      iex> ExGdax.Private.list_accounts()
-      {:ok,
-       [%{"available" => "0.0000000000000000", "balance" => "0.0000000000000000",
-          "currency" => "USD", "hold" => "0.0000000000000000",
-          "id" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
-          "profile_id" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"}, ...]}
-  """
   def list_accounts do
-    Api.get("/accounts")
+    get("/accounts")
   end
 
-  @doc """
-  Get an account.
-
-  ## Examples
-
-    iex> ExGdax.Private.get_account(account["id"])
-    {:ok,
-     %{"available" => "0.0000000000000000", "balance" => "0.0000000000000000",
-        "currency" => "USD", "hold" => "0.0000000000000000",
-        "id" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
-        "profile_id" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"}}
-  """
   def get_account(account_id) do
-    Api.get("/accounts/#{account_id}")
+    get("/accounts/#{account_id}")
   end
 
-  @doc """
-  List account activity.
-
-  ## Examples
-
-      iex> ExGdax.Private.get_account_history(account["id"])
-      {:ok,
-       [%{"amount" => "0.0000000000000000", "balance" => "0.0000000000000000",
-          "created_at" => "2017-07-08T15:26:17.04917Z",
-          "details" => %{"transfer_id" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
-            "transfer_type" => "withdraw"}, "id" => XXXXXXXX, "type" => "transfer"}, ...]}
-  """
-  def get_account_history(account_id) do
-    Api.get("/accounts/#{account_id}/ledger")
+  def list_account_history(account_id, params \\ %{}) do
+    get("/accounts/#{account_id}/ledger", params)
   end
 
-  @doc """
-  Lists holds on an account for active orders or withdraw requests.
-
-  ## Examples
-
-      iex> ExGdax.Private.get_holds(account["id"])
-      {:ok, []}
-  """
-  def get_holds(account_id) do
-    Api.get("/accounts/#{account_id}/holds")
+  def list_holds(account_id, params \\ %{}) do
+    get("/accounts/#{account_id}/holds", params)
   end
 
-  @doc """
-  Place a new order.
-  """
-  def create_order(params \\ %{}) do
-    Api.post("/orders", params)
+  def create_order(params) do
+    post("/orders", params)
   end
 
-  @doc """
-  Cancel all open orders.
-
-  ## Examples
-
-      iex> ExGdax.Private.cancel_orders()
-      {:ok, []}
-  """
   def cancel_orders do
-    Api.delete("/orders")
+    delete("/orders")
+  end
+
+  def list_orders(params \\ %{}) do
+    get("/orders", params)
+  end
+
+  def get_order(order_id) do
+    get("/orders/#{order_id}")
+  end
+
+  def list_fills(params \\ %{}) do
+    get("/fills", params)
+  end
+
+  def list_funding(params \\ %{}) do
+    get("/funding", params)
+  end
+
+  def repay_funding(params) do
+    post("/funding/repay", params)
+  end
+
+  def margin_transfer(params) do
+    post("/profiles/margin-transfer", params)
+  end
+
+  def get_position do
+    get("/position")
+  end
+
+  def close_position(params) do
+    post("/position", params)
+  end
+
+  def deposit_from_coinbase(params) do
+    post("/deposits/coinbase-account", params)
+  end
+
+  def withdraw_to_payment_method(params) do
+    post("/withdrawals/payment-method", params)
+  end
+
+  def withdraw_to_coinbase(params) do
+    post("/withdrawals/coinbase", params)
+  end
+
+  def withdraw_to_crypto(params) do
+    post("/withdrawals/crypto", params)
+  end
+
+  def list_payment_methods do
+    get("/payment-methods")
+  end
+
+  def list_coinbase_accounts do
+    get("/coinbase-accounts")
+  end
+
+  def create_report(params) do
+    post("/reports", params)
+  end
+
+  def get_report(report_id) do
+    get("/reports/#{report_id}")
+  end
+
+  def list_trailing_volume do
+    get("/users/self/trailing-volume")
   end
 end
