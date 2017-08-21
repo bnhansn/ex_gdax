@@ -4,7 +4,7 @@ defmodule ExGdax.Mixfile do
   def project do
     [
       app: :ex_gdax,
-      version: "0.1.0",
+      version: "0.1.1",
       elixir: "~> 1.4",
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,

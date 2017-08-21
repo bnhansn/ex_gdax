@@ -8,7 +8,7 @@ List the Hex package in your application dependencies.
 
 ```elixir
 def deps do
-  [{:ex_gdax, "~> 0.1.0"}]
+  [{:ex_gdax, "~> 0.1"}]
 end
 ```
 
@@ -23,7 +23,8 @@ use Mix.Config
 
 config :ex_gdax, api_key:        {:system, "GDAX_API_KEY"},
                  api_secret:     {:system, "GDAX_API_SECRET"},
-                 api_passphrase: {:system, "GDAX_API_PASSHPRASE"}
+                 api_passphrase: {:system, "GDAX_API_PASSHPRASE"},
+                 api_url:        {:system. "GDAX_API_URL"} # optional
 ```
 
 Alternatively to hard coding credentials, the recommended approach is
@@ -63,7 +64,7 @@ iex> ExGdax.withdraw_to_crypto(%{currency: "ETH", amount: "0.1", crypto_address:
    "id" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"}}
 ```
 
-May the charts be ever in your favor 😊
+May the charts be ever in your favor 📈😊
 
 ## Additional Links
 
@@ -76,4 +77,4 @@ May the charts be ever in your favor 😊
 MIT
 
 ## TODO
-- [] Websocket client
+- [ ] Websocket client

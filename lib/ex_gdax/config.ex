@@ -17,6 +17,6 @@ defmodule ExGdax.Config do
     |> read_from_system(default)
   end
 
-  defp read_from_system({:system, env}, default), do: System.get_env(env) || default
+  defp read_from_system({:system, value}, default), do: value || default
   defp read_from_system(value, _default), do: value
 end
