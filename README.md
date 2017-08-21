@@ -39,7 +39,7 @@ config :ex_gdax, api_key:        System.get_env("GDAX_API_KEY"),
 
 ## Usage
 
-Place an limit order
+Place a limit order
 
 ```elixir
 iex> ExGdax.create_order(%{type: "limit", side: "buy", product_id: "ETH-USD", price: "200", size: "1.0"})
@@ -63,10 +63,17 @@ iex> ExGdax.withdraw_to_crypto(%{currency: "ETH", amount: "0.1", crypto_address:
    "id" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"}}
 ```
 
+May the charts be ever in your favor 😊
+
 ## Additional Links
+
+[Full Documentation](https://hexdocs.pm/ex_gdax/ExGdax.html)
 
 [GDAX API Docs](https://docs.gdax.com)
 
 ## License
 
 MIT
+
+## TODO
+- [] Websocket client
