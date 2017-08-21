@@ -1,5 +1,6 @@
 use Mix.Config
 
-config :ex_gdax, api_key:        System.get_env("GDAX_API_KEY"),
-                 api_secret:     System.get_env("GDAX_API_SECRET"),
-                 api_passphrase: System.get_env("GDAX_API_PASSHPRASE")
+config :ex_gdax, api_key:        {:system, "GDAX_API_KEY"},
+                 api_secret:     {:system, "GDAX_API_SECRET"},
+                 api_passphrase: {:system, "GDAX_API_PASSHPRASE"},
+                 api_url:        {:system, "GDAX_API_URL"}

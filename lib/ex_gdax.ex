@@ -40,14 +40,13 @@ defmodule ExGdax do
   defdelegate list_products, to: ExGdax.Market, as: :list_products
 
   @doc """
-  Get a list of open orders for a product. The amount of detail shown can be
-  customized with the `level` parameter.
+  Get a list of open orders for a product.
 
   ## Parameters
 
-    Name    | Description
-    :------ | :----------
-    `level` | Response detail. Valid options are 1, 2, or 3.
+  Name    | Description
+  :------ | :----------
+  `level` | Response detail. Valid options are 1, 2, or 3.
 
   ## Examples
 
@@ -99,8 +98,7 @@ defmodule ExGdax do
   defdelegate list_trades(product_id, params \\ %{}), to: ExGdax.Market, as: :list_trades
 
   @doc """
-  Historic rates for a product. Rates are returned in grouped buckets based on
-  requested `granularity`.
+  Historic rates for a product.
 
   ## Parameters
 
@@ -119,8 +117,7 @@ defmodule ExGdax do
   defdelegate list_historic_rates(product_id, params \\ %{}), to: ExGdax.Market, as: :list_historic_rates
 
   @doc """
-  Get 24 hr stats for the product. `volume` is in base currency units. `open`,
-  `high`, `low` are in quote currency units.
+  Get 24 hr stats for a product.
 
   ## Examples
 
@@ -151,12 +148,12 @@ defmodule ExGdax do
 
   ## Examples
 
-    iex> ExGdax.get_account(account["id"])
-    {:ok,
-     %{"available" => "0.0000000000000000", "balance" => "0.0000000000000000",
-        "currency" => "USD", "hold" => "0.0000000000000000",
-        "id" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
-        "profile_id" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"}}
+      iex> ExGdax.get_account(account["id"])
+      {:ok,
+       %{"available" => "0.0000000000000000", "balance" => "0.0000000000000000",
+          "currency" => "USD", "hold" => "0.0000000000000000",
+          "id" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+          "profile_id" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"}}
   """
   defdelegate get_account(account_id), to: ExGdax.Private, as: :get_account
 
@@ -173,7 +170,7 @@ defmodule ExGdax do
 
   ## Examples
 
-      iex> ExGdax.list_account_history(account["id"])
+      iex> ExGdax.list_account_history(account["id"], %{limit: 5})
       {:ok,
        [%{"amount" => "0.0000000000000000", "balance" => "0.0000000000000000",
           "created_at" => "2017-07-08T15:26:17.04917Z",
@@ -203,7 +200,20 @@ defmodule ExGdax do
   @doc """
   Place a new order.
 
-  Refer to params listed here https://docs.gdax.com/#place-a-new-order
+  Refer to params listed in [GDAX API docs](https://docs.gdax.com/#place-a-new-order)
+
+  ## Examples
+
+      iex> ExGdax.create_order(%{type: "limit", side: "buy", product_id: "ETH-USD", price: "0.50", size: "1.0"})
+      {:ok,
+       %{"created_at" => "2017-08-20T23:29:17.752637Z",
+         "executed_value" => "0.0000000000000000",
+         "fill_fees" => "0.0000000000000000", "filled_size" => "0.00000000",
+         "id" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX", "post_only" => false,
+         "price" => "0.50000000", "product_id" => "ETH-USD",
+         "settled" => false, "side" => "buy", "size" => "1.00000000",
+         "status" => "pending", "stp" => "dc", "time_in_force" => "GTC",
+         "type" => "limit"}}
   """
   defdelegate create_order(params), to: ExGdax.Private, as: :create_order
 
@@ -213,7 +223,7 @@ defmodule ExGdax do
   ## Examples
 
       iex> ExGdax.cancel_orders()
-      {:ok, []}
+      {:ok, ["XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"]}
   """
   defdelegate cancel_orders, to: ExGdax.Private, as: :cancel_orders
 
@@ -232,13 +242,34 @@ defmodule ExGdax do
 
   ## Examples
 
-      iex> ExGdax.list_orders()
-      {:ok, []}
+      iex> ExGdax.list_orders(%{status: "open"})
+      {:ok,
+       [%{"created_at" => "2017-08-20T23:31:49.235409Z",
+          "executed_value" => "0.0000000000000000",
+          "fill_fees" => "0.0000000000000000", "filled_size" => "0.00000000",
+          "id" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX", "post_only" => true,
+          "price" => "0.75000000", "product_id" => "ETH-USD",
+          "settled" => false, "side" => "buy", "size" => "1.00000000",
+          "status" => "open", "stp" => "dc", "time_in_force" => "GTC",
+          "type" => "limit"}]}
   """
   defdelegate list_orders(params \\ %{}), to: ExGdax.Private, as: :list_orders
 
   @doc """
   Get an order.
+
+  ## Examples
+
+      iex> ExGdax.get_order(order["id"])
+      {:ok,
+       %{"created_at" => "2017-08-20T23:31:49.235409Z",
+         "executed_value" => "0.0000000000000000",
+         "fill_fees" => "0.0000000000000000", "filled_size" => "0.00000000",
+         "id" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX", "post_only" => true,
+         "price" => "0.75000000", "product_id" => "ETH-USD",
+         "settled" => false, "side" => "buy", "size" => "1.00000000",
+         "status" => "open", "stp" => "dc", "time_in_force" => "GTC",
+         "type" => "limit"}}
   """
   defdelegate get_order(order_id), to: ExGdax.Private, as: :get_order
 
@@ -254,6 +285,18 @@ defmodule ExGdax do
   `before`     | Request page before (newer) this pagination id.
   `after`      | Request page after (older) this pagination id.
   `limit`      | Number of results per request. Maximum 100. (default 100)
+
+  ## Examples
+
+      iex> ExGdax.list_fills(%{product_id: "ETH-USD", limit: 1})
+      {:ok,
+       [%{"created_at" => "2017-08-12T21:25:43.453Z",
+          "fee" => "0.0000000000000000", "liquidity" => "M",
+          "order_id" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+          "price" => "305.00000000", "product_id" => "ETH-USD",
+          "profile_id" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+          "settled" => true, "side" => "buy", "size" => "0.29000000",
+          "trade_id" => XXXXXXX, "user_id" => "XXXXXXXXXXXXXXXXXXXXXXX"}]}
   """
   defdelegate list_fills(params \\ %{}), to: ExGdax.Private, as: :list_fills
 
@@ -334,6 +377,19 @@ defmodule ExGdax do
   defdelegate close_position(params), to: ExGdax.Private, as: :close_position
 
   @doc """
+  Deposit funds from a payment method.
+
+  ## Parameters
+
+  Name                | Description
+  :------------------ | :----------
+  `amount`            | The amount to deposit.
+  `currency`          | The type of currency.
+  `payment_method_id` | ID of the payment method.
+  """
+  defdelegate deposit_from_payment_method(params), to: ExGdax.Private, as: :deposit_from_payment_method
+
+  @doc """
   Deposit funds from a coinbase account.
 
   ## Parameters
@@ -343,6 +399,13 @@ defmodule ExGdax do
   `amount`              | The amount to deposit.
   `currency`            | The type of currency.
   `coinbase_account_id` | ID of the coinbase account.
+
+  ## Examples
+
+      iex> ExGdax.deposit_from_coinbase(%{amount: "0.1", currency: "ETH", coinbase_account_id: "XXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"})
+      {:ok,
+       %{"amount" => "0.10000000", "currency" => "ETH",
+         "id" => "XXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"}}
   """
   defdelegate deposit_from_coinbase(params), to: ExGdax.Private, as: :deposit_from_coinbase
 
@@ -382,6 +445,13 @@ defmodule ExGdax do
   `amount`         | The amount to withdraw.
   `currency`       | The type of currency.
   `crypto_address` | A crypto address of the recipient.
+
+  ## Examples
+
+      iex> ExGdax.withdraw_to_crypto(%{amount: "0.01", currency: "ETH", crypto_address: "0x30a9f8b57e2dcb519a4e4982ed6379f9dd6a0bfc"})
+      {:ok,
+       %{"amount" => "0.01000000", "currency" => "ETH",
+         "id" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"}}
   """
   defdelegate withdraw_to_crypto(params), to: ExGdax.Private, as: :withdraw_to_crypto
 

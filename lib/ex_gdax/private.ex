@@ -60,6 +60,10 @@ defmodule ExGdax.Private do
     post("/position", params)
   end
 
+  def deposit_from_payment_method(params) do
+    post("/deposits/payment-method", params)
+  end
+
   def deposit_from_coinbase(params) do
     post("/deposits/coinbase-account", params)
   end

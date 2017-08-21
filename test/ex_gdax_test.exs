@@ -46,7 +46,7 @@ defmodule ExGdaxTest do
       response = http_response(%{"asks" => [[], []], "bids" => [[], []]}, 200)
 
       with_mock_request :get, response, fn ->
-        assert {:ok, %{"asks" => [[], []], "bids" => [[], []]}} == ExGdax.get_order_book("ETH-USD", 2)
+        assert {:ok, %{"asks" => [[], []], "bids" => [[], []]}} == ExGdax.get_order_book("ETH-USD", %{level: 2})
       end
     end
 
