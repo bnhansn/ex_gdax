@@ -38,6 +38,20 @@ config :ex_gdax, api_key:        System.get_env("GDAX_API_KEY"),
                  api_passphrase: System.get_env("GDAX_API_PASSPHRASE")
 ```
 
+Alternatively, if you need to work with multiple GDAX accounts, the private API
+call functions accept an additional `config` (`ExGdax.Config` struct) parameter:
+
+```elixir
+config = %ExGdax.Config{
+  api_key: "API_KEY",
+  api_secret: "API_SECRET",
+  api_passphrase: "API_PASSPHRASE",
+  api_url: "API_URL" # optional
+}
+ExGdax.list_accounts() # use config as specified in config.exs
+ExGdax.list_accounts(config) # use the passed config struct param
+```
+
 ## Usage
 
 Place a limit order
