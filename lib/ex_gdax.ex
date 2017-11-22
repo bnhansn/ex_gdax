@@ -228,6 +228,16 @@ defmodule ExGdax do
   defdelegate cancel_orders, to: ExGdax.Private, as: :cancel_orders
 
   @doc """
+  Cancel a previously placed order.
+
+  ## Examples
+
+      iex> ExGdax.cancel_order("XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX")
+      {:ok, ["XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"]}
+  """
+  defdelegate cancel_order(order_id), to: ExGdax.Private, as: :cancel_order
+
+  @doc """
   List open orders.
 
   ## Parameters
