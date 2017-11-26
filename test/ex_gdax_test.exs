@@ -205,6 +205,16 @@ defmodule ExGdaxTest do
     end
   end
 
+  describe ".cancel_order" do
+    test "cancel a previous order" do
+      response = http_response("b203599c-24d4-4053-863b-29fd711ab3ed", 200)
+
+      with_mock_request :delete, response, fn ->
+        assert {:ok, "b203599c-24d4-4053-863b-29fd711ab3ed"} = ExGdax.cancel_order("b203599c-24d4-4053-863b-29fd711ab3ed")
+      end
+    end
+  end
+
   describe ".list_orders" do
     test "returns list of open orders" do
       response = http_response([], 200)

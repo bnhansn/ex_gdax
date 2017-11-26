@@ -1,6 +1,3 @@
 use Mix.Config
 
-config :ex_gdax, api_key:        {:system, "GDAX_API_KEY"},
-                 api_secret:     {:system, "GDAX_API_SECRET"},
-                 api_passphrase: {:system, "GDAX_API_PASSPHRASE"},
-                 api_url:        {:system, "GDAX_API_URL"}
+if File.exists?("config/#{Mix.env()}.exs"), do: import_config "#{Mix.env()}.exs"
