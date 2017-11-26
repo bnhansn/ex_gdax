@@ -235,7 +235,7 @@ defmodule ExGdax do
       iex> ExGdax.cancel_order("XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX")
       {:ok, ["XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"]}
   """
-  defdelegate cancel_order(order_id), to: ExGdax.Private, as: :cancel_order
+  defdelegate cancel_order(order_id, config \\ nil), to: ExGdax.Private, as: :cancel_order
 
   @doc """
   List open orders.
