@@ -141,7 +141,7 @@ defmodule ExGdax do
           "id" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
           "profile_id" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"}, ...]}
   """
-  defdelegate list_accounts, to: ExGdax.Private, as: :list_accounts
+  defdelegate list_accounts(config \\ nil), to: ExGdax.Private, as: :list_accounts
 
   @doc """
   Get an account.
@@ -155,7 +155,7 @@ defmodule ExGdax do
           "id" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
           "profile_id" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"}}
   """
-  defdelegate get_account(account_id), to: ExGdax.Private, as: :get_account
+  defdelegate get_account(account_id, config \\ nil), to: ExGdax.Private, as: :get_account
 
   @doc """
   List activity for an account.
@@ -177,7 +177,7 @@ defmodule ExGdax do
           "details" => %{"transfer_id" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
             "transfer_type" => "withdraw"}, "id" => XXXXXXXX, "type" => "transfer"}, ...]}
   """
-  defdelegate list_account_history(account_id, params \\ %{}), to: ExGdax.Private, as: :list_account_history
+  defdelegate list_account_history(account_id, params \\ %{}, config \\ nil), to: ExGdax.Private, as: :list_account_history
 
   @doc """
   Lists holds on an account for active orders or withdraw requests.
@@ -195,7 +195,7 @@ defmodule ExGdax do
       iex> ExGdax.list_holds(account["id"])
       {:ok, []}
   """
-  defdelegate list_holds(account_id, params \\ %{}), to: ExGdax.Private, as: :list_holds
+  defdelegate list_holds(account_id, params \\ %{}, config \\ nil), to: ExGdax.Private, as: :list_holds
 
   @doc """
   Place a new order.
@@ -215,7 +215,7 @@ defmodule ExGdax do
          "status" => "pending", "stp" => "dc", "time_in_force" => "GTC",
          "type" => "limit"}}
   """
-  defdelegate create_order(params), to: ExGdax.Private, as: :create_order
+  defdelegate create_order(params, config \\ nil), to: ExGdax.Private, as: :create_order
 
   @doc """
   Cancel all open orders.
@@ -225,7 +225,7 @@ defmodule ExGdax do
       iex> ExGdax.cancel_orders()
       {:ok, ["XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"]}
   """
-  defdelegate cancel_orders, to: ExGdax.Private, as: :cancel_orders
+  defdelegate cancel_orders(config \\ nil), to: ExGdax.Private, as: :cancel_orders
 
   @doc """
   Cancel a previously placed order.
@@ -263,7 +263,7 @@ defmodule ExGdax do
           "status" => "open", "stp" => "dc", "time_in_force" => "GTC",
           "type" => "limit"}]}
   """
-  defdelegate list_orders(params \\ %{}), to: ExGdax.Private, as: :list_orders
+  defdelegate list_orders(params \\ %{}, config \\ nil), to: ExGdax.Private, as: :list_orders
 
   @doc """
   Get an order.
@@ -281,7 +281,7 @@ defmodule ExGdax do
          "status" => "open", "stp" => "dc", "time_in_force" => "GTC",
          "type" => "limit"}}
   """
-  defdelegate get_order(order_id), to: ExGdax.Private, as: :get_order
+  defdelegate get_order(order_id, config \\ nil), to: ExGdax.Private, as: :get_order
 
   @doc """
   Get a list of recent fills.
@@ -308,7 +308,7 @@ defmodule ExGdax do
           "settled" => true, "side" => "buy", "size" => "0.29000000",
           "trade_id" => XXXXXXX, "user_id" => "XXXXXXXXXXXXXXXXXXXXXXX"}]}
   """
-  defdelegate list_fills(params \\ %{}), to: ExGdax.Private, as: :list_fills
+  defdelegate list_fills(params \\ %{}, config \\ nil), to: ExGdax.Private, as: :list_fills
 
   @doc """
   List funding records.
@@ -322,7 +322,7 @@ defmodule ExGdax do
   `after`  |                                   | Request page after (older) this pagination id.
   `limit`  |                                   | Number of results per request. Maximum 100. (default 100)
   """
-  defdelegate list_funding(params \\ %{}), to: ExGdax.Private, as: :list_funding
+  defdelegate list_funding(params \\ %{}, config \\ nil), to: ExGdax.Private, as: :list_funding
 
   @doc """
   Repay funding. Repays the older funding records first.
@@ -334,7 +334,7 @@ defmodule ExGdax do
   `amount`   | Amount of currency to repay.
   `currency` | The currency, example `USD`.
   """
-  defdelegate repay_funding(params), to: ExGdax.Private, as: :repay_funding
+  defdelegate repay_funding(params, config \\ nil), to: ExGdax.Private, as: :repay_funding
 
   @doc """
   Transfer funds between your standard/default profile and a margin profile.
@@ -348,7 +348,7 @@ defmodule ExGdax do
   `currency`          | The currency to transfer, ex: `BTC` or `USD`.
   `amount`            | The amount to transfer between the default and margin profile.
   """
-  defdelegate margin_transfer(params), to: ExGdax.Private, as: :margin_transfer
+  defdelegate margin_transfer(params, config \\ nil), to: ExGdax.Private, as: :margin_transfer
 
   @doc """
   An overview of your profile.
@@ -373,7 +373,7 @@ defmodule ExGdax do
          "profile_id" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX", "status" => "active",
          "user_id" => "XXXXXXXXXXXXXXXXXXXXXXXX"}}
   """
-  defdelegate get_position, to: ExGdax.Private, as: :get_position
+  defdelegate get_position(config \\ nil), to: ExGdax.Private, as: :get_position
 
   @doc """
   Close your position.
@@ -384,7 +384,7 @@ defmodule ExGdax do
   :----------- | :----------
   `repay_only` | Either `true` or `false`
   """
-  defdelegate close_position(params), to: ExGdax.Private, as: :close_position
+  defdelegate close_position(params, config \\ nil), to: ExGdax.Private, as: :close_position
 
   @doc """
   Deposit funds from a payment method.
@@ -397,7 +397,7 @@ defmodule ExGdax do
   `currency`          | The type of currency.
   `payment_method_id` | ID of the payment method.
   """
-  defdelegate deposit_from_payment_method(params), to: ExGdax.Private, as: :deposit_from_payment_method
+  defdelegate deposit_from_payment_method(params, config \\ nil), to: ExGdax.Private, as: :deposit_from_payment_method
 
   @doc """
   Deposit funds from a coinbase account.
@@ -417,7 +417,7 @@ defmodule ExGdax do
        %{"amount" => "0.10000000", "currency" => "ETH",
          "id" => "XXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"}}
   """
-  defdelegate deposit_from_coinbase(params), to: ExGdax.Private, as: :deposit_from_coinbase
+  defdelegate deposit_from_coinbase(params, config \\ nil), to: ExGdax.Private, as: :deposit_from_coinbase
 
   @doc """
   Withdraw funds to a payment method.
@@ -430,7 +430,7 @@ defmodule ExGdax do
   `currency`          | The type of currency.
   `payment_method_id` | ID of the payment method.
   """
-  defdelegate withdraw_to_payment_method(params), to: ExGdax.Private, as: :withdraw_to_payment_method
+  defdelegate withdraw_to_payment_method(params, config \\ nil), to: ExGdax.Private, as: :withdraw_to_payment_method
 
   @doc """
   Withdraw funds to a coinbase account.
@@ -443,7 +443,7 @@ defmodule ExGdax do
   `currency`            | The type of currency.
   `coinbase_account_id` | ID of the coinbase account.
   """
-  defdelegate withdraw_to_coinbase(params), to: ExGdax.Private, as: :withdraw_to_coinbase
+  defdelegate withdraw_to_coinbase(params, config \\ nil), to: ExGdax.Private, as: :withdraw_to_coinbase
 
   @doc """
   Withdraw funds to a crypto address.
@@ -463,7 +463,7 @@ defmodule ExGdax do
        %{"amount" => "0.01000000", "currency" => "ETH",
          "id" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"}}
   """
-  defdelegate withdraw_to_crypto(params), to: ExGdax.Private, as: :withdraw_to_crypto
+  defdelegate withdraw_to_crypto(params, config \\ nil), to: ExGdax.Private, as: :withdraw_to_crypto
 
   @doc """
   List your payment methods.
@@ -479,7 +479,7 @@ defmodule ExGdax do
             "resource" => "account",
             "resource_path" => "/v2/accounts/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"}, ...]}
   """
-  defdelegate list_payment_methods, to: ExGdax.Private, as: :list_payment_methods
+  defdelegate list_payment_methods(config \\ nil), to: ExGdax.Private, as: :list_payment_methods
 
   @doc """
   List your coinbase accounts.
@@ -492,7 +492,7 @@ defmodule ExGdax do
           "id" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX", "name" => "ETH Wallet",
           "primary" => false, "type" => "wallet"}, ...]}
   """
-  defdelegate list_coinbase_accounts, to: ExGdax.Private, as: :list_coinbase_accounts
+  defdelegate list_coinbase_accounts(config \\ nil), to: ExGdax.Private, as: :list_coinbase_accounts
 
   @doc """
   Create a report.
@@ -509,12 +509,12 @@ defmodule ExGdax do
   `format`     | `pdf` or `csv` (defualt is `pdf`).
   `email`      | Email address to send the report to (optional).
   """
-  defdelegate create_report(params), to: ExGdax.Private, as: :create_report
+  defdelegate create_report(params, config \\ nil), to: ExGdax.Private, as: :create_report
 
   @doc """
   Get report status.
   """
-  defdelegate get_report(report_id), to: ExGdax.Private, as: :get_report
+  defdelegate get_report(report_id, config \\ nil), to: ExGdax.Private, as: :get_report
 
   @doc """
   List your 30-day trailing volume for all products.
@@ -526,5 +526,5 @@ defmodule ExGdax do
        [%{"exchange_volume" => "8704829.60943332", "product_id" => "ETH-USD",
           "recorded_at" => "2017-07-31T00:17:16.331884Z", "volume" => "1.00000000"}]}
   """
-  defdelegate list_trailing_volume, to: ExGdax.Private, as: :list_trailing_volume
+  defdelegate list_trailing_volume(config \\ nil), to: ExGdax.Private, as: :list_trailing_volume
 end

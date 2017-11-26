@@ -139,6 +139,19 @@ defmodule ExGdaxTest do
         assert {:ok, [%{"balance" => "0.00"}]} = ExGdax.list_accounts()
       end
     end
+
+    test "accepts dynamically specified config" do
+      config = %ExGdax.Config{
+        api_key: "GDAX_API_KEY",
+        api_secret: Base.encode64("GDAX_API_SECRET"),
+        api_passphrase: "GDAX_API_PASSPHRASE"
+      }
+      response = http_response([%{"balance" => "0.00"}], 200)
+
+      with_mock_request :get, response, fn ->
+        assert {:ok, [%{"balance" => "0.00"}]} = ExGdax.list_accounts(config)
+      end
+    end
   end
 
   describe ".get_account" do

@@ -4,103 +4,103 @@ defmodule ExGdax.Private do
   """
   import ExGdax.Api
 
-  def list_accounts do
-    get("/accounts")
+  def list_accounts(config \\ nil) do
+    get("/accounts", %{}, config)
   end
 
-  def get_account(account_id) do
-    get("/accounts/#{account_id}")
+  def get_account(account_id, config \\ nil) do
+    get("/accounts/#{account_id}", %{}, config)
   end
 
-  def list_account_history(account_id, params \\ %{}) do
-    get("/accounts/#{account_id}/ledger", params)
+  def list_account_history(account_id, params \\ %{}, config \\ nil) do
+    get("/accounts/#{account_id}/ledger", params, config)
   end
 
-  def list_holds(account_id, params \\ %{}) do
-    get("/accounts/#{account_id}/holds", params)
+  def list_holds(account_id, params \\ %{}, config \\ nil) do
+    get("/accounts/#{account_id}/holds", params, config)
   end
 
-  def create_order(params) do
-    post("/orders", params)
+  def create_order(params, config \\ nil) do
+    post("/orders", params, config)
   end
 
-  def cancel_orders do
-    delete("/orders")
+  def cancel_orders(config \\ nil) do
+    delete("/orders", config)
   end
 
-  def cancel_order(order_id) do
-    delete("/orders/#{order_id}")
+  def cancel_order(order_id, config \\ nil) do
+    delete("/orders/#{order_id}", config)
   end
 
-  def list_orders(params \\ %{}) do
-    get("/orders", params)
+  def list_orders(params \\ %{}, config \\ nil) do
+    get("/orders", params, config)
   end
 
-  def get_order(order_id) do
-    get("/orders/#{order_id}")
+  def get_order(order_id, config \\ nil) do
+    get("/orders/#{order_id}", %{}, config)
   end
 
-  def list_fills(params \\ %{}) do
-    get("/fills", params)
+  def list_fills(params \\ %{}, config \\ nil) do
+    get("/fills", params, config)
   end
 
-  def list_funding(params \\ %{}) do
-    get("/funding", params)
+  def list_funding(params \\ %{}, config \\ nil) do
+    get("/funding", params, config)
   end
 
-  def repay_funding(params) do
-    post("/funding/repay", params)
+  def repay_funding(params, config \\ nil) do
+    post("/funding/repay", params, config)
   end
 
-  def margin_transfer(params) do
-    post("/profiles/margin-transfer", params)
+  def margin_transfer(params, config \\ nil) do
+    post("/profiles/margin-transfer", params, config)
   end
 
-  def get_position do
-    get("/position")
+  def get_position(config \\ nil) do
+    get("/position", %{}, config)
   end
 
-  def close_position(params) do
-    post("/position", params)
+  def close_position(params, config \\ nil) do
+    post("/position", params, config)
   end
 
-  def deposit_from_payment_method(params) do
-    post("/deposits/payment-method", params)
+  def deposit_from_payment_method(params, config \\ nil) do
+    post("/deposits/payment-method", params, config)
   end
 
-  def deposit_from_coinbase(params) do
-    post("/deposits/coinbase-account", params)
+  def deposit_from_coinbase(params, config \\ nil) do
+    post("/deposits/coinbase-account", params, config)
   end
 
-  def withdraw_to_payment_method(params) do
-    post("/withdrawals/payment-method", params)
+  def withdraw_to_payment_method(params, config \\ nil) do
+    post("/withdrawals/payment-method", params, config)
   end
 
-  def withdraw_to_coinbase(params) do
-    post("/withdrawals/coinbase", params)
+  def withdraw_to_coinbase(params, config \\ nil) do
+    post("/withdrawals/coinbase", params, config)
   end
 
-  def withdraw_to_crypto(params) do
-    post("/withdrawals/crypto", params)
+  def withdraw_to_crypto(params, config \\ nil) do
+    post("/withdrawals/crypto", params, config)
   end
 
-  def list_payment_methods do
-    get("/payment-methods")
+  def list_payment_methods(config \\ nil) do
+    get("/payment-methods", %{}, config)
   end
 
-  def list_coinbase_accounts do
-    get("/coinbase-accounts")
+  def list_coinbase_accounts(config \\ nil) do
+    get("/coinbase-accounts", %{}, config)
   end
 
-  def create_report(params) do
-    post("/reports", params)
+  def create_report(params, config \\ nil) do
+    post("/reports", params, config)
   end
 
-  def get_report(report_id) do
-    get("/reports/#{report_id}")
+  def get_report(report_id, config \\ nil) do
+    get("/reports/#{report_id}", %{}, config)
   end
 
-  def list_trailing_volume do
-    get("/users/self/trailing-volume")
+  def list_trailing_volume(config \\ nil) do
+    get("/users/self/trailing-volume", %{}, config)
   end
 end

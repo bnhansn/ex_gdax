@@ -4,30 +4,33 @@ defmodule ExGdax.Api do
   """
   alias ExGdax.Config
 
-  def get(path, params \\ %{}) do
+  def get(path, params \\ %{}, config \\ nil) do
     path = build_query_path(path, params)
+    config = Config.config_or_env_config(config)
 
     path
-    |> url()
-    |> HTTPoison.get(headers("GET", path))
+    |> url(config)
+    |> HTTPoison.get(headers("GET", path, %{}, config))
     |> parse_response()
   end
 
-  def post(path, params \\ %{}) do
+  def post(path, params \\ %{}, config \\ nil) do
+    config = Config.config_or_env_config(config)
     path
-    |> url()
-    |> HTTPoison.post(Poison.encode!(params), headers("POST", path, params))
+    |> url(config)
+    |> HTTPoison.post(Poison.encode!(params), headers("POST", path, params, config))
     |> parse_response()
   end
 
-  def delete(path) do
+  def delete(path, config \\ nil) do
+    config = Config.config_or_env_config(config)
     path
-    |> url()
-    |> HTTPoison.delete(headers("DELETE", path))
+    |> url(config)
+    |> HTTPoison.delete(headers("DELETE", path, %{}, config))
     |> parse_response()
   end
 
-  defp url(path), do: Config.api_url() <> path
+  defp url(path, config), do: config.api_url <> path
 
   defp build_query_path(path, params) do
     query =
@@ -38,20 +41,20 @@ defmodule ExGdax.Api do
     String.trim_trailing(path <> "?" <> query, "?")
   end
 
-  defp headers(method, path, body \\ %{}) do
+  defp headers(method, path, body, config) do
     timestamp = :os.system_time(:seconds)
 
     [
       "Content-Type": "application/json",
-      "CB-ACCESS-KEY": Config.api_key(),
-      "CB-ACCESS-SIGN": sign_request(timestamp, method, path, body),
+      "CB-ACCESS-KEY": config.api_key,
+      "CB-ACCESS-SIGN": sign_request(timestamp, method, path, body, config),
       "CB-ACCESS-TIMESTAMP": timestamp,
-      "CB-ACCESS-PASSPHRASE": Config.api_passphrase(),
+      "CB-ACCESS-PASSPHRASE": config.api_passphrase,
     ]
   end
 
-  defp sign_request(timestamp, method, path, body) do
-    key = Base.decode64!(Config.api_secret() || "")
+  defp sign_request(timestamp, method, path, body, config) do
+    key = Base.decode64!(config.api_secret || "")
     body = if Enum.empty?(body), do: "", else: Poison.encode!(body)
     data = "#{timestamp}#{method}#{path}#{body}"
 
