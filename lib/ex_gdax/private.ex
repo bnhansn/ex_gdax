@@ -28,6 +28,10 @@ defmodule ExGdax.Private do
     delete("/orders")
   end
 
+  def cancel_orders(order_id) do
+    delete("/orders/#{order_id}")
+  end
+
   def list_orders(params \\ %{}) do
     get("/orders", params)
   end
