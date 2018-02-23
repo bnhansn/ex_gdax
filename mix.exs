@@ -14,6 +14,7 @@ defmodule ExGdax.Mixfile do
       name: "ExGdax",
       description: "GDAX API client for Elixir",
       source_url: "https://github.com/bnhansn/ex_gdax",
+      elixirc_paths: elixirc_paths(Mix.env)
     ]
   end
 
@@ -28,7 +29,8 @@ defmodule ExGdax.Mixfile do
       {:mock, "~> 0.2.1", only: :test},
       {:credo, "~> 0.8.4", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.16.2", only: :dev, runtime: false},
-      {:mix_test_watch, "~> 0.5", only: :dev, runtime: false}
+      {:mix_test_watch, "~> 0.5", only: :dev, runtime: false},
+      {:websockex, "~> 0.4.1"}
     ]
   end
 
@@ -47,4 +49,7 @@ defmodule ExGdax.Mixfile do
       links: %{"GitHub" => "https://github.com/bnhansn/ex_gdax"}
     ]
   end
+
+  defp elixirc_paths(:dev), do: ["lib", "examples"]
+  defp elixirc_paths(_),    do: ["lib"]
 end
