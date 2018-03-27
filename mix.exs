@@ -23,7 +23,7 @@ defmodule ExGdax.Mixfile do
 
   defp deps do
     [
-      {:httpoison, "~> 0.12.0"},
+      {:httpoison, "~> 1.0"},
       {:poison, "~> 3.1"},
       {:mock, "~> 0.2.1", only: :test},
       {:credo, "~> 0.8.4", only: [:dev, :test], runtime: false},
