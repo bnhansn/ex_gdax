@@ -16,6 +16,7 @@ defmodule ExGdax.Api do
 
   def post(path, params \\ %{}, config \\ nil) do
     config = Config.config_or_env_config(config)
+
     path
     |> url(config)
     |> HTTPoison.post(Poison.encode!(params), headers("POST", path, params, config))
@@ -24,6 +25,7 @@ defmodule ExGdax.Api do
 
   def delete(path, config \\ nil) do
     config = Config.config_or_env_config(config)
+
     path
     |> url(config)
     |> HTTPoison.delete(headers("DELETE", path, %{}, config))
@@ -35,7 +37,7 @@ defmodule ExGdax.Api do
   defp build_query_path(path, params) do
     query =
       params
-      |> Enum.map(fn({key, val}) -> "#{key}=#{val}" end)
+      |> Enum.map(fn {key, val} -> "#{key}=#{val}" end)
       |> Enum.join("&")
 
     String.trim_trailing(path <> "?" <> query, "?")
@@ -49,7 +51,7 @@ defmodule ExGdax.Api do
       "CB-ACCESS-KEY": config.api_key,
       "CB-ACCESS-SIGN": sign_request(timestamp, method, path, body, config),
       "CB-ACCESS-TIMESTAMP": timestamp,
-      "CB-ACCESS-PASSPHRASE": config.api_passphrase,
+      "CB-ACCESS-PASSPHRASE": config.api_passphrase
     ]
   end
 
@@ -71,6 +73,7 @@ defmodule ExGdax.Api do
         else
           {:error, Poison.decode!(body)["message"], code}
         end
+
       {:error, %HTTPoison.Error{reason: reason}} ->
         {:error, reason}
     end
