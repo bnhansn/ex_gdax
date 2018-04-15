@@ -14,6 +14,7 @@ defmodule ExGdax.Config do
       api_url: api_url()
     }
   end
+
   def config_or_env_config(config), do: config
 
   def api_key, do: from_env(:ex_gdax, :api_key)
@@ -25,6 +26,7 @@ defmodule ExGdax.Config do
   def api_url, do: from_env(:ex_gdax, :api_url, @default_api_url)
 
   defp from_env(otp_app, key, default \\ nil)
+
   defp from_env(otp_app, key, default) do
     otp_app
     |> Application.get_env(key, default)

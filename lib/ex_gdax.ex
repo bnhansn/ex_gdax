@@ -114,7 +114,9 @@ defmodule ExGdax do
       {:ok,
        [[1501142880, 200.43, 200.43, 200.43, 200.43, 5.6956], ...]}
   """
-  defdelegate list_historic_rates(product_id, params \\ %{}), to: ExGdax.Market, as: :list_historic_rates
+  defdelegate list_historic_rates(product_id, params \\ %{}),
+    to: ExGdax.Market,
+    as: :list_historic_rates
 
   @doc """
   Get 24 hr stats for a product.
@@ -177,7 +179,9 @@ defmodule ExGdax do
           "details" => %{"transfer_id" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
             "transfer_type" => "withdraw"}, "id" => XXXXXXXX, "type" => "transfer"}, ...]}
   """
-  defdelegate list_account_history(account_id, params \\ %{}, config \\ nil), to: ExGdax.Private, as: :list_account_history
+  defdelegate list_account_history(account_id, params \\ %{}, config \\ nil),
+    to: ExGdax.Private,
+    as: :list_account_history
 
   @doc """
   Lists holds on an account for active orders or withdraw requests.
@@ -195,7 +199,9 @@ defmodule ExGdax do
       iex> ExGdax.list_holds(account["id"])
       {:ok, []}
   """
-  defdelegate list_holds(account_id, params \\ %{}, config \\ nil), to: ExGdax.Private, as: :list_holds
+  defdelegate list_holds(account_id, params \\ %{}, config \\ nil),
+    to: ExGdax.Private,
+    as: :list_holds
 
   @doc """
   Place a new order.
@@ -397,7 +403,9 @@ defmodule ExGdax do
   `currency`          | The type of currency.
   `payment_method_id` | ID of the payment method.
   """
-  defdelegate deposit_from_payment_method(params, config \\ nil), to: ExGdax.Private, as: :deposit_from_payment_method
+  defdelegate deposit_from_payment_method(params, config \\ nil),
+    to: ExGdax.Private,
+    as: :deposit_from_payment_method
 
   @doc """
   Deposit funds from a coinbase account.
@@ -417,7 +425,9 @@ defmodule ExGdax do
        %{"amount" => "0.10000000", "currency" => "ETH",
          "id" => "XXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"}}
   """
-  defdelegate deposit_from_coinbase(params, config \\ nil), to: ExGdax.Private, as: :deposit_from_coinbase
+  defdelegate deposit_from_coinbase(params, config \\ nil),
+    to: ExGdax.Private,
+    as: :deposit_from_coinbase
 
   @doc """
   Withdraw funds to a payment method.
@@ -430,7 +440,9 @@ defmodule ExGdax do
   `currency`          | The type of currency.
   `payment_method_id` | ID of the payment method.
   """
-  defdelegate withdraw_to_payment_method(params, config \\ nil), to: ExGdax.Private, as: :withdraw_to_payment_method
+  defdelegate withdraw_to_payment_method(params, config \\ nil),
+    to: ExGdax.Private,
+    as: :withdraw_to_payment_method
 
   @doc """
   Withdraw funds to a coinbase account.
@@ -443,7 +455,9 @@ defmodule ExGdax do
   `currency`            | The type of currency.
   `coinbase_account_id` | ID of the coinbase account.
   """
-  defdelegate withdraw_to_coinbase(params, config \\ nil), to: ExGdax.Private, as: :withdraw_to_coinbase
+  defdelegate withdraw_to_coinbase(params, config \\ nil),
+    to: ExGdax.Private,
+    as: :withdraw_to_coinbase
 
   @doc """
   Withdraw funds to a crypto address.
@@ -463,7 +477,9 @@ defmodule ExGdax do
        %{"amount" => "0.01000000", "currency" => "ETH",
          "id" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"}}
   """
-  defdelegate withdraw_to_crypto(params, config \\ nil), to: ExGdax.Private, as: :withdraw_to_crypto
+  defdelegate withdraw_to_crypto(params, config \\ nil),
+    to: ExGdax.Private,
+    as: :withdraw_to_crypto
 
   @doc """
   List your payment methods.
@@ -492,7 +508,9 @@ defmodule ExGdax do
           "id" => "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX", "name" => "ETH Wallet",
           "primary" => false, "type" => "wallet"}, ...]}
   """
-  defdelegate list_coinbase_accounts(config \\ nil), to: ExGdax.Private, as: :list_coinbase_accounts
+  defdelegate list_coinbase_accounts(config \\ nil),
+    to: ExGdax.Private,
+    as: :list_coinbase_accounts
 
   @doc """
   Create a report.
