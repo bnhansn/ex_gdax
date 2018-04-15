@@ -1,5 +1,16 @@
 # Change Log
 
+## [v0.1.3](https://github.com/bnhansn/ex_gdax/tree/v0.1.3) (2018-03-27)
+[Full Changelog](https://github.com/bnhansn/ex_gdax/compare/v0.1.2...v0.1.3)
+
+**Closed issues:**
+
+- Test instructions [\#6](https://github.com/bnhansn/ex_gdax/issues/6)
+
+**Merged pull requests:**
+
+- Update httpoison dependency to 1.0 [\#10](https://github.com/bnhansn/ex_gdax/pull/10) ([rupurt](https://github.com/rupurt))
+
 ## [v0.1.2](https://github.com/bnhansn/ex_gdax/tree/v0.1.2) (2017-11-26)
 **Closed issues:**
 
