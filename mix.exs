@@ -4,16 +4,16 @@ defmodule ExGdax.Mixfile do
   def project do
     [
       app: :ex_gdax,
-      version: "0.1.2",
+      version: "0.1.3",
       elixir: "~> 1.4",
-      build_embedded: Mix.env == :prod,
-      start_permanent: Mix.env == :prod,
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
       deps: deps(),
       docs: docs(),
       package: package(),
       name: "ExGdax",
       description: "GDAX API client for Elixir",
-      source_url: "https://github.com/bnhansn/ex_gdax",
+      source_url: "https://github.com/bnhansn/ex_gdax"
     ]
   end
 
@@ -35,7 +35,7 @@ defmodule ExGdax.Mixfile do
   defp docs do
     [
       main: "ExGdax",
-      extras: ["README.md"],
+      extras: ["README.md"]
     ]
   end
 
