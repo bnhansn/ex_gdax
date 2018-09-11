@@ -413,4 +413,21 @@ defmodule ExGdaxTest do
       end)
     end
   end
+
+  describe ".user_fee_rate" do
+    test "returns the report status" do
+      response =
+        http_response(
+          %{"fee" => "0.0030", "usd_volume" => nil, "fee_usd_total" => nil},
+          200
+        )
+
+      with_mock_request(:get, response, fn ->
+        assert ExGdax.user_fee_rate() == {
+                 :ok,
+                 %{"fee" => "0.0030", "usd_volume" => nil, "fee_usd_total" => nil}
+               }
+      end)
+    end
+  end
 end

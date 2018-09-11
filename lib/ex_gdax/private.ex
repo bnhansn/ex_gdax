@@ -103,4 +103,8 @@ defmodule ExGdax.Private do
   def list_trailing_volume(config \\ nil) do
     get("/users/self/trailing-volume", %{}, config)
   end
+
+  def user_fee_rate(config \\ nil) do
+    get("/fee-rates/user", %{}, config)
+  end
 end

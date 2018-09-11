@@ -545,4 +545,12 @@ defmodule ExGdax do
           "recorded_at" => "2017-07-31T00:17:16.331884Z", "volume" => "1.00000000"}]}
   """
   defdelegate list_trailing_volume(config \\ nil), to: ExGdax.Private, as: :list_trailing_volume
+
+  @doc """
+  Get your current fee rate based on the 30-day trailing USD volume
+
+  iex> ExGdax.user_fee_rate()
+  {:ok, %{"fee" => "0.0030", "usd_volume" => nil, "fee_usd_total" => nil}}
+  """
+  defdelegate user_fee_rate(config \\ nil), to: ExGdax.Private, as: :user_fee_rate
 end
