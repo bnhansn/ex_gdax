@@ -1,5 +1,18 @@
 # Change Log
 
+## [v0.1.4](https://github.com/bnhansn/ex_gdax/tree/v0.1.4) (2018-09-11)
+[Full Changelog](https://github.com/bnhansn/ex_gdax/compare/v0.1.3...v0.1.4)
+
+**Closed issues:**
+
+- Release version 0.1.3 [\#11](https://github.com/bnhansn/ex_gdax/issues/11)
+
+**Merged pull requests:**
+
+- Update default url to coinbase pro [\#14](https://github.com/bnhansn/ex_gdax/pull/14) ([rupurt](https://github.com/rupurt))
+- Add user fee rate [\#13](https://github.com/bnhansn/ex_gdax/pull/13) ([rupurt](https://github.com/rupurt))
+- Run elixir formatter [\#12](https://github.com/bnhansn/ex_gdax/pull/12) ([bnhansn](https://github.com/bnhansn))
+
 ## [v0.1.3](https://github.com/bnhansn/ex_gdax/tree/v0.1.3) (2018-03-27)
 [Full Changelog](https://github.com/bnhansn/ex_gdax/compare/v0.1.2...v0.1.3)
 
