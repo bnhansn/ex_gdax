@@ -2,7 +2,7 @@ defmodule ExGdax.Config do
   @moduledoc """
   Stores configuration variables for signing authenticated requests to GDAX.
   """
-  @default_api_url "https://api.gdax.com"
+  @default_api_url "https://api.pro.coinbase.com"
   @enforce_keys [:api_key, :api_secret, :api_passphrase]
   defstruct [:api_key, :api_secret, :api_passphrase, api_url: @default_api_url]
 
