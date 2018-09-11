@@ -5,10 +5,10 @@ defmodule ExGdax.Api do
   alias ExGdax.Config
 
   def get(path, params \\ %{}, config \\ nil) do
-    path = build_query_path(path, params)
     config = Config.config_or_env_config(config)
 
     path
+    |> query_string(params)
     |> url(config)
     |> HTTPoison.get(headers("GET", path, %{}, config))
     |> parse_response()
@@ -34,13 +34,15 @@ defmodule ExGdax.Api do
 
   defp url(path, config), do: config.api_url <> path
 
-  defp build_query_path(path, params) do
+  defp query_string(path, params) when map_size(params) == 0, do: path
+
+  defp query_string(path, params) do
     query =
       params
       |> Enum.map(fn {key, val} -> "#{key}=#{val}" end)
       |> Enum.join("&")
 
-    String.trim_trailing(path <> "?" <> query, "?")
+    path <> "?" <> query
   end
 
   defp headers(method, path, body, config) do
@@ -71,7 +73,10 @@ defmodule ExGdax.Api do
         if code in 200..299 do
           {:ok, Poison.decode!(body)}
         else
-          {:error, Poison.decode!(body)["message"], code}
+          case Poison.decode(body) do
+            {:ok, json} -> {:error, json["message"], code}
+            {:error, _} -> {:error, body, code}
+          end
         end
 
       {:error, %HTTPoison.Error{reason: reason}} ->
