@@ -6,11 +6,11 @@ defmodule ExGdax.Api do
 
   def get(path, params \\ %{}, config \\ nil) do
     config = Config.config_or_env_config(config)
+    qs = query_string(path, params)
 
-    path
-    |> query_string(params)
+    qs
     |> url(config)
-    |> HTTPoison.get(headers("GET", path, %{}, config))
+    |> HTTPoison.get(headers("GET", qs, %{}, config))
     |> parse_response()
   end
 
