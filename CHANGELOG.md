@@ -1,5 +1,12 @@
 # Change Log
 
+## [v0.1.5](https://github.com/bnhansn/ex_gdax/tree/v0.1.5) (2018-10-26)
+[Full Changelog](https://github.com/bnhansn/ex_gdax/compare/v0.1.4...v0.1.5)
+
+**Merged pull requests:**
+
+- Fix invalid signature on authenticated GET request [\#15](https://github.com/bnhansn/ex_gdax/pull/15) ([aquamatt](https://github.com/aquamatt))
+
 ## [v0.1.4](https://github.com/bnhansn/ex_gdax/tree/v0.1.4) (2018-09-11)
 [Full Changelog](https://github.com/bnhansn/ex_gdax/compare/v0.1.3...v0.1.4)
 
