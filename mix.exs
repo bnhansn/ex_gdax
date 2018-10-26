@@ -27,7 +27,7 @@ defmodule ExGdax.Mixfile do
       {:poison, "~> 3.1"},
       {:mock, "~> 0.2.1", only: :test},
       {:credo, "~> 0.8.4", only: [:dev, :test], runtime: false},
-      {:ex_doc, "~> 0.16.2", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.19", only: :dev, runtime: false},
       {:mix_test_watch, "~> 0.5", only: :dev, runtime: false}
     ]
   end
