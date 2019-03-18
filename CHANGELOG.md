@@ -1,5 +1,16 @@
 # Change Log
 
+## [v0.1.6](https://github.com/bnhansn/ex_gdax/tree/v0.1.6) (2019-03-18)
+[Full Changelog](https://github.com/bnhansn/ex_gdax/compare/v0.1.5...v0.1.6)
+
+**Closed issues:**
+
+- WebSocket support [\#9](https://github.com/bnhansn/ex_gdax/issues/9)
+
+**Merged pull requests:**
+
+- Add dialyzer & bump Poison [\#16](https://github.com/bnhansn/ex_gdax/pull/16) ([rupurt](https://github.com/rupurt))
+
 ## [v0.1.5](https://github.com/bnhansn/ex_gdax/tree/v0.1.5) (2018-10-26)
 [Full Changelog](https://github.com/bnhansn/ex_gdax/compare/v0.1.4...v0.1.5)
 
