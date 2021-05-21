@@ -2,7 +2,7 @@ defmodule ExGdax.Api do
   @moduledoc """
   Provides basic HTTP interface with GDAX API.
   """
-  alias ExGdax.Config
+  alias ExGdax.{Config, Auth}
 
   def get(path, params \\ %{}, config \\ nil) do
     config = Config.config_or_env_config(config)
@@ -51,20 +51,10 @@ defmodule ExGdax.Api do
     [
       "Content-Type": "application/json",
       "CB-ACCESS-KEY": config.api_key,
-      "CB-ACCESS-SIGN": sign_request(timestamp, method, path, body, config),
+      "CB-ACCESS-SIGN": Auth.sign_request(timestamp, method, path, body, config),
       "CB-ACCESS-TIMESTAMP": timestamp,
       "CB-ACCESS-PASSPHRASE": config.api_passphrase
     ]
-  end
-
-  defp sign_request(timestamp, method, path, body, config) do
-    key = Base.decode64!(config.api_secret || "")
-    body = if Enum.empty?(body), do: "", else: Poison.encode!(body)
-    data = "#{timestamp}#{method}#{path}#{body}"
-
-    :sha256
-    |> :crypto.hmac(key, data)
-    |> Base.encode64()
   end
 
   defp parse_response(response) do
