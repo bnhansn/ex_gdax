@@ -1,4 +1,6 @@
 # ExGdax
+[![Build Status](https://github.com/bnhansn/ex_gdax/workflows/test/badge.svg?branch=main)](https://github.com/bnhansn/ex_gdax/actions?query=workflow%3Atest)
+[![hex.pm version](https://img.shields.io/hexpm/v/ex_gdax.svg?style=flat)](https://hex.pm/packages/ex_gdax)
 
 GDAX API client for Elixir.
 
