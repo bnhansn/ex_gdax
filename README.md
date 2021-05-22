@@ -10,7 +10,7 @@ List the Hex package in your application dependencies.
 
 ```elixir
 def deps do
-  [{:ex_gdax, "~> 0.1"}]
+  [{:ex_gdax, "~> 0.2"}]
 end
 ```
 
